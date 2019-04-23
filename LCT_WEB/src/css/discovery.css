@@ -1,0 +1,63 @@
+.App-intro {
+    text-align: center;
+    padding-top: 33px;
+    font-size: 28px;
+    font-family: 'Damion';
+    width: 300px;
+    margin: 150px auto;
+    height: 60px;
+    background-color: #7DB4B5;
+    border-radius: 8px 8px 0 0;
+    box-shadow: inset 0px -5px 0px 0px rgba(224, 239, 241, 0.75);
+    -webkit-transition: border 0.2s linear, box-shadow 0.2s linear, background-color .35s ease;
+}
+
+.header {
+    height: 60px;
+    background-color: #7DB4B5;
+    border-radius: 8px 8px 0 0;
+    box-shadow: inset 0px -5px 0px 0px rgba(224, 239, 241, 0.75);
+    -webkit-transition: border 0.2s linear, box-shadow 0.2s linear, background-color .35s ease;
+
+}
+
+.h1 {
+    text-align: center;
+    padding-top: 13px;
+    font-size: 28px;
+    font-family: 'Damion';
+    color: #FFFFFF;
+}
+
+#signUpFormContainer {
+    padding: 20px 10px;
+    position: relative;
+}
+
+#signUpForm {
+    width: 90%;
+    margin: 0px auto;
+}
+
+.signUpRow {
+    margin: 15px 0;
+    text-align: center;
+}
+
+
+.signUpRow input[type=checkbox] {
+    display: none;
+}
+
+.signUpRow input[type=checkbox]+label::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 1px;
+    height: 15px;
+    width: 15px;
+    border: 3px solid rgba(125, 180, 181, .85);
+    border-radius: 5px;
+    transition: background-color .2s;
+}
