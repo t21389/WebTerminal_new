@@ -1,49 +1,51 @@
 CREATE TABLE IF NOT EXISTS Direction (
-  DirectiondId tinyint(3) unsigned NOT NULL ,
-  DirectionValues varchar(20) NOT NULL,
-  PRIMARY KEY  (DirectionId)
+  DirectionId SMALLINT PRIMARY KEY,
+  DirectionValues varchar(20) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS AddressType (
-  AddressUnit tinyint(3) unsigned NOT NULL ,
-  AddressValues varchar(5) NOT NULL,
-  PRIMARY KEY  (AddressUnit)
+  AddressId INT(3) unsigned PRIMARY KEY ,
+  AddressValues varchar(5) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS Flag (
-  FlagUnit tinyint(3) unsigned NOT NULL ,
-  FlagValues varchar(5) NOT NULL,
-  PRIMARY KEY  (FlagUnit)
+  FlagId tinyint(1) PRIMARY KEY  ,
+  FlagValues varchar(5) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS GuiType (
-  GuiId tinyint(3) unsigned NOT NULL ,
-  GuiValues varchar(15) NOT NULL,
-  PRIMARY KEY  (GuiId)
+  GuiId tinyint(1) PRIMARY KEY ,
+  GuiValues varchar(15) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS NeType (
-  NeUnit tinyint(3) unsigned NOT NULL ,
-  NeValues varchar(15) NOT NULL,
-  PRIMARY KEY  (NeUnit)
+  NeId SMALLINT PRIMARY KEY ,
+  NeValues varchar(15) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS OpticalReach (
-  OpticalReachUnit tinyint(3) unsigned NOT NULL ,
-  OpticalReachValues varchar(20) NOT NULL,
-  PRIMARY KEY  (OpticalReachUnit)
+  OpticalReachId TINYINT(1) PRIMARY KEY ,
+  OpticalReachValues varchar(20) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS SystemCapacity (
-  SystenCapacityUnit tinyint(3) unsigned NOT NULL ,
-  SystemCapacityValues varchar(10) NOT NULL,
-  PRIMARY KEY  (SystemCapacityUnit)
+  SystenCapacityId SMALLINT PRIMARY KEY  ,
+  SystemCapacityValues varchar(10) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS Topology (
-  TopologyUnit tinyint(3) unsigned NOT NULL ,
-  TopologyValues varchar(25) NOT NULL,
-  PRIMARY KEY  (TopologyUnit)
+  TopologyId TINYINT(1) PRIMARY KEY ,
+  TopologyValues varchar(25) NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS ConnType (
+  ConnTypeId TINYINT(1) PRIMARY KEY ,
+  ConnTypeValues varchar(10) NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS OrderType (
+  OrderTypeId TINYINT(1) PRIMARY KEY ,
+  OrderTypeValues varchar(10) NOT NULL
   );
 
   
