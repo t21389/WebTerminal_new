@@ -1,0 +1,16 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "<<<<<<< HEAD\r # LCT\r =======\r LCT Database\r >>>>>>> my frst",
+  "main": "index.js",
+  "dependencies": {
+    "mysql": "^2.16.0",
+    "fs": "^0.0.1-security"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
