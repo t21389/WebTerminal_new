@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS Direction (
   );
 
   CREATE TABLE IF NOT EXISTS SystemCapacity (
-  SystenCapacityId SMALLINT PRIMARY KEY  ,
+  SystemCapacityId SMALLINT PRIMARY KEY  ,
   SystemCapacityValues varchar(10) NOT NULL
   );
 
@@ -48,4 +48,7 @@ CREATE TABLE IF NOT EXISTS Direction (
   OrderTypeValues varchar(10) NOT NULL
   );
 
+INSERT INTO Direction(DirectionId,DirectionValues) VALUES (
+  
+)
   
