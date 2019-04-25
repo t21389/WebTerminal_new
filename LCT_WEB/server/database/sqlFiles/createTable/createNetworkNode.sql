@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS Interface(
     InterfaceId INT PRIMARY KEY,
-    InterfaceName VARCHAR(20) NOT NULL,
+    InterfaceName VARCHAR(30) NOT NULL,
     WsIp VARCHAR(20) NOT NULL,
-    WsSubnetMask VARCHAR(20) NOT NULL
+    WsSubnetMask VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Order_details(
