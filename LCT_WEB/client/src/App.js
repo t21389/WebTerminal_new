@@ -11,19 +11,13 @@ import Footer from './components/Footer/footer';
 
 
 
+
 class App extends Component {
-
-  constructor(props) {
-    super(props)
-
-  }
-
-
-
 
   render() {
 
     return ( < div >
+
       <
       Discovery / >
       <
