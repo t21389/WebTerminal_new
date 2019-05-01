@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS Interface(
     InterfaceId INT PRIMARY KEY,
-    InterfaceName VARCHAR(20) NOT NULL,
+    InterfaceName VARCHAR(30) NOT NULL,
     WsIp VARCHAR(20) NOT NULL,
-    WsSubnetMask VARCHAR(20) NOT NULL
+    WsSubnetMask VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Order_details(
@@ -10,13 +10,13 @@ CREATE TABLE IF NOT EXISTS Order_details(
     ConnType TINYINT(1) NOT NULL,
     OrderType TINYINT(1) NOT NULL,
     InterfaceId INT NULL,
-    UserId VARCHAR(30),
-    RemoteIp NULL,
-    State VARCHAR(10),
+    UserId VARCHAR(30) NOT NULL,
+    RemoteIp VARCHAR(20) NULL,
+    State VARCHAR(10) NOT NULL,
     SDNReady TINYINT NOT NULL default '0',
     CONSTRAINT fk_Order_ConnType
         FOREIGN KEY (ConnType)
-        REFERENCES ConnType(ConnId)
+        REFERENCES ConnType(ConnTypeId)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     CONSTRAINT fk_Order_OrderType
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS Network_details (
 
 CREATE TABLE IF NOT EXISTS Node_details (
   NetworkId VARCHAR(36) NOT NULL,
-  NeId INT NOT NULL,
+  NodeId INT NOT NULL,
   NeType SMALLINT NULL,
   Direction SMALLINT NULL,
   StationName VARCHAR(45) NULL,
@@ -58,26 +58,26 @@ CREATE TABLE IF NOT EXISTS Node_details (
   CtrlVersion FLOAT,
   DataVersion FLOAT,
   Degree TINYINT NULL,
-  GneAddrType INT,
+  GneAddrType INT(3) unsigned,
   GneFlag TINYINT NULL,
   VlanTag INT NULL,
   EmsSubnet VARCHAR(45) NULL,
   Gateway VARCHAR(6),
   GneGateway VARCHAR(45) NULL,
   GneIp VARCHAR(45) NULL,
-  GneIpPrefixLen INT;
+  GneIpPrefixLen INT,
   GneIpV6 VARCHAR(100) NULL,
   GuiId TINYINT(1) NOT NULL,
   IlaType TINYINT(1),
   LctIp VARCHAR(6) NOT NULL,
   McpIp VARCHAR(6) NOT NULL,
-  OpticalReach VARCHAR(45) NULL,
+  OpticalReach TINYINT(1) NULL,
   PotpType TINYINT,
-  RouterAddrType INT,
+  RouterAddrType INT(3) unsigned,
   RouterId VARCHAR(6),
   RouterIpPrefixLen INT,
   SAPI VARCHAR(16),
-  SubNetworkId VARCHAR(36)
+  SubNetworkId VARCHAR(36),
   SystemCapacity SMALLINT,
   TimeStamp BIGINT,
   Topology TINYINT(1),
@@ -113,8 +113,8 @@ CREATE TABLE IF NOT EXISTS Node_details (
     REFERENCES GuiType(GuiId)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT fk_Node_NeId
-    FOREIGN KEY (neId)
+  CONSTRAINT fk_Node_NeType
+    FOREIGN KEY (neType)
     REFERENCES NeType(NeId)
     ON DELETE CASCADE
     ON UPDATE CASCADE,

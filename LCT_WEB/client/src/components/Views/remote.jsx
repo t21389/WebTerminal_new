@@ -15,6 +15,7 @@ class Remote extends React.Component {
     });
   }
   render() {
+    var jsonString = this.props.interfaceJson;
     return (
       <div>
         <div class="col-lg-12 login-form">
@@ -26,10 +27,14 @@ class Remote extends React.Component {
                 onChange={this.onChange.bind(this)}
                 className="form-control"
               >
-                <option value="select">10.5.0.10</option>
-                <option value="First">10.5.0.11</option>
-                <option value="Second">10.5.0.12</option>
-                <option value="Third">10.5.0.13</option>
+                {jsonString.value.map(jsonObject => {
+                console.log("test" + jsonObject);
+                return (
+                  <option>
+                    {jsonObject.Interface_netmask}
+                  </option>
+                );
+              })}
               </select>
             </div>
 

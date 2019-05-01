@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS Interface;
+DROP TABLE IF EXISTS Order_details;
+DROP TABLE IF EXISTS Network_details; 
+DROP TABLE IF EXISTS Node_details;

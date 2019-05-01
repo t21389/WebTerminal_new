@@ -6,6 +6,7 @@ import Local from "./local";
 import Remote from "./remote";
 import Modal from "./modal";
 
+
 class Discovery extends React.Component {
   constructor(props) {
     super(props);
@@ -34,17 +35,37 @@ class Discovery extends React.Component {
           console.log("event 1: callinterface", this.props);
           this.props.callback(Component).then(resp => {
             console.log("response final ", JSON.parse(resp));
+            console.log("**********" + resp);
             let response = JSON.parse(resp);
-            response.push({ dummy: "value" });
+            //response.push({ dummy: "value" });
             this.setState({
               interfaceJson: response
             });
+            this.toggleDiv();
           });
 
-          // console.log(
-          //   "this.state.interfaceJson[0] :" + this.state.interfaceJson[0]
-          // );
-          this.toggleDiv();
+          console.log(
+            "this.state.interfaceJson[0] :" + this.state.interfaceJson
+          );
+        }
+        break;
+      case 2:
+        {
+          console.log("event 2: callinterface", this.props);
+          this.props.callback(Component).then(resp => {
+            console.log("response finalR ", JSON.parse(resp));
+            console.log("**********" + resp);
+            let response = JSON.parse(resp);
+            //response.push({ dummy: "value" });
+            this.setState({
+              interfaceJson: response
+            });
+            this.toggleDivRemote();
+          });
+
+          console.log(
+            "this.state.interfaceJson[0] :" + this.state.interfaceJson
+          );
         }
         break;
     }
@@ -80,14 +101,15 @@ class Discovery extends React.Component {
               <div class="col-lg-12 login-title">
                 <h1>Optical Transport Controller</h1>
                 {/* <input
-                  type="button"
-                  onClick={this.showModal}
-                  onClick={this.clickHandler.bind(
+                  type="button"  value="Show Modal"
+                  onClick={this.showModal}></input>
+                
+                  console.log("**********"+interfaceJson)onClick={this.clickHandler.bind(
                     this,
                     1,
                     <Modal interfaceJson={this.interfaceJson} />
                   )}
-                  value="Show Modal"
+                 
                 /> */}
 
                 {/* <Modal showM={this.state.showM}>this is abc </Modal> */}
@@ -195,9 +217,16 @@ class Discovery extends React.Component {
                     >
                       Local
                     </button>
+          
                   </div>
                   <div class="col-md-6">
-                    <button onClick={this.toggleDivRemote}>Remote</button>
+                    <button
+                      // onClick={this.toggleDiv}
+                      onClick={this.clickHandler.bind(this, 2)}
+                    >
+                      Remote
+                      {/* <button onClick={this.toggleDivRemote}>Remote</button> */}
+                    </button>
                   </div>
                 </div>
 
@@ -207,7 +236,9 @@ class Discovery extends React.Component {
                   )}
                 </div>
                 <div class="col-lg-12 login-form">
-                  {this.state.shows && <Remote />}
+                  {this.state.shows && (
+                    <Remote interfaceJson={this.state.interfaceJson} />
+                  )}
                 </div>
               </div>
             </div>
