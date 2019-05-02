@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS Topology (
   Dir8IsConnected tinyint(1),
   IsEmsConnected tinyint(1),
   GuiId TINYINT(1) NOT NULL,
-  TimeStamp datetime NOT NULL,
+  TimeStamp VARCHAR(20) NOT NULL,
   PRIMARY KEY (NetworkId, NodeId),
   CONSTRAINT fk_Topology_NetworkId
     FOREIGN KEY (NetworkId)
