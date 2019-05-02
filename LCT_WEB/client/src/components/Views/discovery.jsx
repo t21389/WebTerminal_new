@@ -1,9 +1,11 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable default-case */
 import React, { Component } from "react";
 import "./../../css/discovery.css";
 import Local from "./local";
 import Remote from "./remote";
 import Modal from "./modal";
-import axios from "axios";
+
 
 class Discovery extends React.Component {
   constructor(props) {
@@ -11,27 +13,64 @@ class Discovery extends React.Component {
 
     this.state = {
       value: "select",
-      shown: true,
       show: false,
       shows: false,
       showM: false,
-      username: ""
+      username: "",
+      interfaceJson: ""
     };
     this.toggleDiv = this.toggleDiv.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
-
-  toggle() {
-    this.setState({
-      shown: !this.state.shown
-    });
-  }
-
   onChange(e) {
     this.setState({
       value: e.target.value
     });
   }
+  clickHandler(event) {
+    console.log("cliked here", event, "and", this.props);
+
+    switch (event) {
+      case 1:
+        {
+          console.log("event 1: callinterface", this.props);
+          this.props.callback(Component).then(resp => {
+            console.log("response final ", JSON.parse(resp));
+            console.log("**********" + resp);
+            let response = JSON.parse(resp);
+            //response.push({ dummy: "value" });
+            this.setState({
+              interfaceJson: response
+            });
+            this.toggleDiv();
+          });
+
+          console.log(
+            "this.state.interfaceJson[0] :" + this.state.interfaceJson
+          );
+        }
+        break;
+      case 2:
+        {
+          console.log("event 2: callinterface", this.props);
+          this.props.callback(Component).then(resp => {
+            console.log("response finalR ", JSON.parse(resp));
+            console.log("**********" + resp);
+            let response = JSON.parse(resp);
+            //response.push({ dummy: "value" });
+            this.setState({
+              interfaceJson: response
+            });
+            this.toggleDivRemote();
+          });
+
+          console.log(
+            "this.state.interfaceJson[0] :" + this.state.interfaceJson
+          );
+        }
+        break;
+    }
+  }
+
   toggleDiv = () => {
     const { show } = this.state;
     this.setState({ show: !show });
@@ -47,19 +86,9 @@ class Discovery extends React.Component {
       showM: !this.state.showM
     });
   };
-  handleClick() {
-    axios
-      .get("https://github.com/noopur2309/gamelayout.git")
-      .then(response => console.log(response));
-  }
-  render() {
-    var shown = {
-      display: this.state.shown ? "block" : "none"
-    };
 
-    var hidden = {
-      display: this.state.shown ? "none" : "block"
-    };
+  render() {
+    // console.log("rerender " + this.state.interfaceJson);
     return (
       <div>
         <div class="container">
@@ -71,23 +100,28 @@ class Discovery extends React.Component {
               </div>
               <div class="col-lg-12 login-title">
                 <h1>Optical Transport Controller</h1>
-                <input
-                  type="button"
-                  onClick={this.handleClick}
-                  // onClick={this.showModal}
-                  value="Show Modal"
-                />
+                {/* <input
+                  type="button"  value="Show Modal"
+                  onClick={this.showModal}></input>
+                
+                  console.log("**********"+interfaceJson)onClick={this.clickHandler.bind(
+                    this,
+                    1,
+                    <Modal interfaceJson={this.interfaceJson} />
+                  )}
+                 
+                /> */}
 
                 {/* <Modal showM={this.state.showM}>this is abc </Modal> */}
-                <Modal
+                {/* <Modal
                   class="modal fade"
                   showM={this.state.showM}
                   tabindex="-1"
                   role="dialog"
                   aria-labelledby="exampleModalLongTitle"
                   aria-hidden="true"
-                >
-                  <div class="modal-dialog" role="document">
+                /> */}
+                {/* <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">
@@ -173,22 +207,39 @@ class Discovery extends React.Component {
                     </div>
                   </div>
                 </Modal>
-              </div>
+              </div> */}
 
-              <div class="row">
-                <div class="col-md-6">
-                  <button onClick={this.toggleDiv}>Local</button>
+                <div class="row">
+                  <div class="col-md-6">
+                    <button
+                      // onClick={this.toggleDiv}
+                      onClick={this.clickHandler.bind(this, 1)}
+                    >
+                      Local
+                    </button>
+          
+                  </div>
+                  <div class="col-md-6">
+                    <button
+                      // onClick={this.toggleDiv}
+                      onClick={this.clickHandler.bind(this, 2)}
+                    >
+                      Remote
+                      {/* <button onClick={this.toggleDivRemote}>Remote</button> */}
+                    </button>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <button onClick={this.toggleDivRemote}>Remote</button>
-                </div>
-              </div>
 
-              <div class="col-lg-12 login-form">
-                {this.state.show && <Local />}
-              </div>
-              <div class="col-lg-12 login-form">
-                {this.state.shows && <Remote />}
+                <div class="col-lg-12 login-form">
+                  {this.state.show && (
+                    <Local interfaceJson={this.state.interfaceJson} />
+                  )}
+                </div>
+                <div class="col-lg-12 login-form">
+                  {this.state.shows && (
+                    <Remote interfaceJson={this.state.interfaceJson} />
+                  )}
+                </div>
               </div>
             </div>
           </div>
