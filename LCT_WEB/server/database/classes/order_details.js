@@ -4,8 +4,6 @@ class Order_details
     constructor(values)
     {
       this.values=values;
-    //   console.log(this.values);
-    //   console.log(Object.keys(this.values[0]));
     }
     async insert()
     {
