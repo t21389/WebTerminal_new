@@ -1,8 +1,8 @@
-CREATE TABLE IF NOT EXISTS Interface(
+CREATE TABLE IF NOT EXISTS Interface_details(
     InterfaceId INT PRIMARY KEY,
     InterfaceName VARCHAR(30) NOT NULL,
     WsIp VARCHAR(20) NOT NULL,
-    WsSubnetMask VARCHAR(30) NOT NULL
+    WsNetMask VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Order_details(
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Order_details(
         ON UPDATE CASCADE,
     CONSTRAINT fk_Order_Interface
         FOREIGN KEY (InterfaceId)
-        REFERENCES Interface(InterfaceId)
+        REFERENCES Interface_details(InterfaceId)
         ON DELETE CASCADE
         ON UPDATE CASCADE,    
     CONSTRAINT fk_Order_SDNReady
@@ -55,33 +55,38 @@ CREATE TABLE IF NOT EXISTS Node_details (
   Direction SMALLINT NULL,
   StationName VARCHAR(45) NULL,
   SiteName VARCHAR(45) NULL,
-  CtrlVersion FLOAT,
-  DataVersion FLOAT,
+  CtrlVersion FLOAT(1),
+  DataVersion FLOAT(1),
   Degree TINYINT NULL,
   GneAddrType INT(3) unsigned,
   GneFlag TINYINT NULL,
-  VlanTag INT NULL,
-  EmsSubnet VARCHAR(45) NULL,
-  Gateway VARCHAR(6),
+  Gateway VARCHAR(20),
   GneGateway VARCHAR(45) NULL,
   GneIp VARCHAR(45) NULL,
-  GneIpPrefixLen INT,
+  GneIpPrefixLen INT(1),
   GneIpV6 VARCHAR(100) NULL,
   GuiId TINYINT(1) NOT NULL,
+  TimeStamp VARCHAR(20) NOT NULL,
   IlaType TINYINT(1),
-  LctIp VARCHAR(6) NOT NULL,
-  McpIp VARCHAR(6) NOT NULL,
+  LctIp VARCHAR(20) NOT NULL,
+  McpIp VARCHAR(20) NOT NULL,
   OpticalReach TINYINT(1) NULL,
-  PotpType TINYINT,
+  PotpType TINYINT(1),
   RouterAddrType INT(3) unsigned,
-  RouterId VARCHAR(6),
-  RouterIpPrefixLen INT,
+  RouterId VARCHAR(20),
+  RouterIpPrefixLen INT(1),
   SAPI VARCHAR(16),
-  SubNetworkId VARCHAR(36),
-  SystemCapacity SMALLINT,
-  TimeStamp BIGINT,
+  SystemCapacity SMALLINT(1),
+  OrderOfOtm SMALLINT(1),
+  Date int(4) unsigned,
+  Month int(2) unsigned,
+  Year int(4) unsigned,
+  Hour int(2) unsigned default '00',
+  Minute int(2) unsigned default '00',
+  Second int(2) unsigned default '00' ,
   Topology TINYINT(1),
   Vlan INT unsigned,
+  MacAddress VARCHAR(20),
   PRIMARY KEY (NetworkId, NodeId),
   CONSTRAINT fk_Node_NetworkId
     FOREIGN KEY (NetworkId)
@@ -130,6 +135,97 @@ CREATE TABLE IF NOT EXISTS Node_details (
     ON UPDATE CASCADE,
     CONSTRAINT fk_Node_Topology
     FOREIGN KEY (Topology)
-    REFERENCES Topology(TopologyId)
+    REFERENCES TopologyType(TopologyTypeId)
     ON DELETE CASCADE
-    ON UPDATE CASCADE );
+    ON UPDATE CASCADE 
+);
+
+
+CREATE TABLE IF NOT EXISTS Topology (
+  NetworkId VARCHAR(36) NOT NULL,
+  NodeId INT NOT NULL,
+  Dir1 INT NULL,
+  Dir1IsConnected tinyint(1),
+  Dir2 INT NULL,
+  Dir2IsConnected tinyint(1),
+  Dir3 INT NULL,
+  Dir3IsConnected tinyint(1),
+  Dir4 INT NULL,
+  Dir4IsConnected tinyint(1),
+  Dir5 INT NULL,
+  Dir5IsConnected tinyint(1),
+  Dir6 INT NULL,
+  Dir6IsConnected tinyint(1),
+  Dir7 INT NULL,
+  Dir7IsConnected tinyint(1),
+  Dir8 INT NULL,
+  Dir8IsConnected tinyint(1),
+  IsEmsConnected tinyint(1),
+  GuiId TINYINT(1) NOT NULL,
+  TimeStamp datetime NOT NULL,
+  PRIMARY KEY (NetworkId, NodeId),
+  CONSTRAINT fk_Topology_NetworkId
+    FOREIGN KEY (NetworkId)
+    REFERENCES Network_details(NetworkId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+  );
+
+
+CREATE TABLE IF NOT EXISTS ChassisType (
+  ChassisTypeId INT unsigned PRIMARY KEY,
+  NoOfSlot INT unsigned default '1',
+  SystemType VARCHAR(20) NOT NULL,
+  SwitchSlot_1 INT unsigned default '0',
+  SwitchSlot_2 INT unsigned default '0'
+);
+
+
+CREATE TABLE IF NOT EXISTS SubrackChassisDetails(
+  RackId INT unsigned,
+  SubRackId INT unsigned,
+  ChassisType INT unsigned,
+  PRIMARY KEY (RackId,SubRackId),
+  CONSTRAINT fk_SubrackChassisDetails_ChassisType
+    FOREIGN KEY (ChassisType)
+    REFERENCES ChassisType(ChassisTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS CardPhysicalDetails (
+  CardType INT unsigned,
+  CardSubType INT unsigned,
+  NoOfSlotsOccupied INT unsigned,
+  PRIMARY KEY (CardType, CardSubType)
+);
+
+CREATE TABLE IF NOT EXISTS CmCurrentCardStatus (
+  RackId TINYINT(1),
+  SubrackId TINYINT(1),
+  CardId TINYINT(1),
+  CardState TINYINT(1),
+  CardSubType TINYINT(1),
+  CardType TINYINT(1),
+  GuiId TINYINT,
+  TimeStamp datetime,
+  PRIMARY KEY(RackId,SubRackId,CardId,CardState)
+);
+
+
+CREATE TABLE IF NOT EXISTS CmClientIntfAdaptInfo (
+  CardSubType TINYINT(1),
+  CardType TINYINT(1),
+  ClientIntfId TINYINT(1),
+  ClientName json ,
+  ClientType TINYINT(1),
+  GuiId TINYINT(1),
+  IntfStatus TINYINT(1),
+  LinePortNum TINYINT(1),
+  RackId TINYINT(1),
+  SubrackId TINYINT(1),
+  TimeStamp datetime,
+  TpnId TINYINT(1),
+  TributarySetId TINYINT(1),
+  PRIMARY Key (RackId, SubrackId, TpnId, CardType, CardSubType,ClientIntfId)
+);

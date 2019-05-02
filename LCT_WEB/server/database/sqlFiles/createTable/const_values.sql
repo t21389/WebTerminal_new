@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS Direction (
   SystemCapacityValues varchar(10) NOT NULL
   );
 
-  CREATE TABLE IF NOT EXISTS Topology (
-  TopologyId TINYINT(1) PRIMARY KEY ,
-  TopologyValues varchar(25) NOT NULL
+  CREATE TABLE IF NOT EXISTS TopologyType (
+  TopologyTypeId TINYINT(1) PRIMARY KEY ,
+  TopologyTypeValues varchar(25) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS ConnType (
@@ -99,7 +99,7 @@ INSERT INTO SystemCapacity(SystemCapacityId,SystemCapacityValues) VALUES
 (2, "FORTY_ODD"),
 (3, "EIGHTY");
 
-INSERT INTO Topology(TopologyId,TopologyValues) VALUES
+INSERT INTO TopologyType(TopologyTypeId,TopologyTypeValues) VALUES
 (1, "TOPOLOGY_LINEAR"),
 (2,"TOPOLOGY_HUBBED_RING"),
 (3,"TOPOLOGY_CLOSED_RING"),
