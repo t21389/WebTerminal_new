@@ -1,19 +1,7 @@
 var sql = require("../DBConnection");
 
 async function insert_Interface(values) {
-    return new Promise(async (resolve, reject) => {
-      let insertquery = `INSERT INTO Interface(InterfaceId,InterfaceName,WsIp,WsSubnetMask) VALUES ?`;
-      sql.con.query(insertquery, [[values]], async function (err, results) {
-        if (err) {
-          console.log(err.message);
-          reject(err);
-        }
-        else {
-          console.log("result", results.affectedRows);
-          resolve(results.affectedRows);
-        }
-      });
-    })
+    
   }
 
   async function insert_Order_details(values) {
@@ -70,3 +58,6 @@ module.exports={
     insert_Network_details,
     insert_Node_details
 }
+
+//insert_Interface([23,"grthrth","rteeyrtytry","fdbfgbfff"])
+//insert_Order_details(["fsdfsd",1,1,23,"dfefefe","fsf","eewfwf",1])
