@@ -48,8 +48,23 @@ class Topology
           }
         });
       })
-
     }
+    async fetch()
+        {
+          return new Promise(async (resolve, reject) => {
+            let insertquery = `select * FROM Topology`;
+            db.con.query(insertquery, async function (err, results) {
+              if (err) {
+                console.log(err.message);
+                reject(err);
+              }
+              else {
+                console.log("result", results);
+                resolve(results);
+              }
+            });
+          })
+        }
 }
 
 module.exports={Topology}

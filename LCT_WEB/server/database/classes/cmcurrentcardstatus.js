@@ -71,9 +71,9 @@ var db=require("./DB");
     
     module.exports={CmCurrentCardStatus}
     
- var o=[{RackId:2,SubrackId:1,CurrentCardId:1,CurrentCardState:2,CurrentCardSubType:1,CurrentCardType:3,PreviousCardId:2,PreviousCardState:1,PreviousCardSubType:1,PreviousCardType:1,GuiId:1,TimeStamp:"oooooobbhcvu"}];
-    var o_d=new CmCurrentCardStatus(o);
-    //o_d.insert();
-    o_d.update();
-    // o_d.delete();
-    o_d.fetch();
+//  var o=[{RackId:2,SubrackId:1,CurrentCardId:1,CurrentCardState:2,CurrentCardSubType:1,CurrentCardType:3,PreviousCardId:2,PreviousCardState:1,PreviousCardSubType:1,PreviousCardType:1,GuiId:1,TimeStamp:"oooooobbhcvu"}];
+//     var o_d=new CmCurrentCardStatus(o);
+//     //o_d.insert();
+//     o_d.update();
+//     // o_d.delete();
+//     o_d.fetch();

@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Order_details(
     InterfaceId INT unsigned NULL,
     UserId VARCHAR(30) NOT NULL,
     RemoteIp VARCHAR(20) NULL,
-    State VARCHAR(10) NOT NULL,
+    State VARCHAR(20) NOT NULL,
     SDNReady TINYINT unsigned NOT NULL default '0',
     CONSTRAINT fk_Order_ConnType
         FOREIGN KEY (ConnType)
@@ -55,15 +55,15 @@ CREATE TABLE IF NOT EXISTS Node_details (
   Direction SMALLINT unsigned NULL,
   StationName VARCHAR(45) NULL,
   SiteName VARCHAR(45) NULL,
-  CtrlVersion FLOAT(1) unsigned,
-  DataVersion FLOAT(1) unsigned,
+  CtrlVersion FLOAT unsigned,
+  DataVersion FLOAT unsigned,
   Degree TINYINT unsigned NULL,
-  GneAddrType INT unsigned(3) unsigned,
+  GneAddrType INT unsigned unsigned,
   GneFlag TINYINT unsigned NULL,
   Gateway VARCHAR(20),
   GneGateway VARCHAR(45) NULL,
   GneIp VARCHAR(45) NULL,
-  GneIpPrefixLen INT(1) unsigned,
+  GneIpPrefixLen INT unsigned,
   GneIpV6 VARCHAR(100) NULL,
   GuiId TINYINT(1) unsigned NOT NULL,
   TimeStamp VARCHAR(20) NOT NULL,
@@ -72,9 +72,9 @@ CREATE TABLE IF NOT EXISTS Node_details (
   McpIp VARCHAR(20) NOT NULL,
   OpticalReach TINYINT(1) unsigned NULL,
   PotpType TINYINT(1) unsigned,
-  RouterAddrType INT(3) unsigned,
+  RouterAddrType INT unsigned,
   RouterId VARCHAR(20),
-  RouterIpPrefixLen INT(1) unsigned,
+  RouterIpPrefixLen INT unsigned,
   SAPI VARCHAR(16),
   SystemCapacity SMALLINT(1) unsigned,
   OrderOfOtm SMALLINT(1) unsigned,
@@ -197,19 +197,38 @@ CREATE TABLE IF NOT EXISTS CardPhysicalDetails (
   CardType INT unsigned,
   CardSubType INT unsigned,
   NoOfSlotsOccupied INT unsigned,
-  PRIMARY KEY (CardType, CardSubType)
+  PRIMARY KEY (CardType, CardSubType),
+  CONSTRAINT fk_CardPhysicalDetails_CardType
+    FOREIGN KEY (CardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS CmCurrentCardStatus (
   RackId TINYINT(1) unsigned,
   SubrackId TINYINT(1) unsigned,
-  CardId TINYINT(1) unsigned,
-  CardState TINYINT(1) unsigned,
-  CardSubType TINYINT(1) unsigned,
-  CardType TINYINT(1) unsigned,
-  GuiId TINYINT unsigned,
+  CurrentCardId TINYINT(1) unsigned,
+  CurrentCardState TINYINT(1) unsigned,
+  CurrentCardSubType TINYINT(1) unsigned,
+  CurrentCardType TINYINT(1) unsigned,
+  PreviousCardId TINYINT(1) unsigned,
+  PreviousCardState TINYINT(1) unsigned,
+  PreviousCardSubType TINYINT(1) unsigned,
+  PreviousCardType TINYINT(1) unsigned,
+  GuiId TINYINT(1) unsigned,
   TimeStamp varchar(30),
-  PRIMARY KEY(RackId,SubRackId,CardId,CardState)
+  PRIMARY KEY(RackId,SubRackId,CurrentCardId,CurrentCardState),
+  CONSTRAINT fk_CmCurrentCardStatus_CardType
+    FOREIGN KEY (CurrentCardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT fk_CmCurrentCardStatus_CardType
+    FOREIGN KEY (PreviousCardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 
@@ -227,5 +246,46 @@ CREATE TABLE IF NOT EXISTS CmClientIntfAdaptInfo (
   SubrackId TINYINT(1) unsigned,
   TimeStamp varchar(30),
   TributarySetId TINYINT(1) unsigned,
-  PRIMARY Key (RackId, SubrackId, CardId, CardType, CardSubType,ClientIntfId)
+  PRIMARY Key (RackId, SubrackId, CardId, CardType, CardSubType,ClientIntfId),
+  CONSTRAINT fk_CmClientIntfAdaptInfo_CardType
+    FOREIGN KEY (CardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS CmWavelengthDetail (
+  WavelengthNum TINYINT unsigned PRIMARY KEY,
+  Frequency FLOAT,
+  WavelengthVal FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS CmExpectedConfig (
+NeType SMALLINT unsigned,
+CardType TINYINT(1) unsigned,
+ExpectedFlag tinyint(1) unsigned,
+PRIMARY KEY(NeType,CardType),
+CONSTRAINT fk_CmExpectedConfig_NeType
+    FOREIGN KEY (NeType)
+    REFERENCES NeType(NeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+CONSTRAINT fk_CmExpectedConfig_CardType
+    FOREIGN KEY (CardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+CONSTRAINT fk_CmExpectedConfig_ExpectedFlag
+    FOREIGN KEY (ExpectedFlag)
+    REFERENCES Flag(FlagId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS CmDirString (
+DirVal TINYINT unsigned PRIMARY KEY,
+DirStr varchar(32),
+GuiId TINYINT(1) unsigned,
+TimeStamp varchar(30) NOT NULL
 );
