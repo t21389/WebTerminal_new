@@ -51,12 +51,29 @@ class Order_details
       })
 
     }
+    async fetch()
+    {
+      return new Promise(async (resolve, reject) => {
+        let insertquery = `select * FROM Order_details`;
+        db.con.query(insertquery, async function (err, results) {
+          if (err) {
+            console.log(err.message);
+            reject(err);
+          }
+          else {
+            console.log("result", results);
+            resolve(results);
+          }
+        });
+      })
+    }
 }
 
 module.exports={Order_details}
 
 // var o=[{OrderId:"O122",ConnType:1,OrderType:2,InterfaceId:123,UserId:"eytyyu",RemoteIp:"192.168.14.159",State:"Ready",SDNReady:1}];
-// var o_d=new Order_details(o);
+var o_d=new Order_details();
 // //o_d.insert();
 // //o_d.update();
 // o_d.delete();
+o_d.fetch();
