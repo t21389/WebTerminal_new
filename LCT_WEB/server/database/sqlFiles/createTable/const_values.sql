@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS Direction (
-  DirectionId SMALLINT PRIMARY KEY,
+  DirectionId SMALLINT unsigned PRIMARY KEY,
   DirectionValues varchar(20) NOT NULL
   );
 
@@ -9,42 +9,42 @@ CREATE TABLE IF NOT EXISTS Direction (
   );
 
   CREATE TABLE IF NOT EXISTS Flag (
-  FlagId tinyint(1) PRIMARY KEY  ,
+  FlagId tinyint(1) unsigned PRIMARY KEY  ,
   FlagValues varchar(5) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS GuiType (
-  GuiId tinyint(1) PRIMARY KEY ,
+  GuiId tinyint(1) unsigned PRIMARY KEY ,
   GuiValues varchar(15) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS NeType (
-  NeId SMALLINT PRIMARY KEY ,
+  NeId SMALLINT unsigned PRIMARY KEY ,
   NeValues varchar(15) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS OpticalReach (
-  OpticalReachId TINYINT(1) PRIMARY KEY ,
+  OpticalReachId TINYINT(1) unsigned PRIMARY KEY ,
   OpticalReachValues varchar(20) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS SystemCapacity (
-  SystemCapacityId SMALLINT PRIMARY KEY  ,
+  SystemCapacityId SMALLINT unsigned PRIMARY KEY  ,
   SystemCapacityValues varchar(10) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS TopologyType (
-  TopologyTypeId TINYINT(1) PRIMARY KEY ,
+  TopologyTypeId TINYINT(1) unsigned PRIMARY KEY ,
   TopologyTypeValues varchar(25) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS ConnType (
-  ConnTypeId TINYINT(1) PRIMARY KEY ,
+  ConnTypeId TINYINT(1) unsigned PRIMARY KEY ,
   ConnTypeValues varchar(10) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS OrderType (
-  OrderTypeId TINYINT(1) PRIMARY KEY ,
+  OrderTypeId TINYINT(1) unsigned PRIMARY KEY ,
   OrderTypeValues varchar(10) NOT NULL
   );
 
