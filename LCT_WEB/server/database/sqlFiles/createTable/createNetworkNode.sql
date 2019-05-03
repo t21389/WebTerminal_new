@@ -203,10 +203,14 @@ CREATE TABLE IF NOT EXISTS CardPhysicalDetails (
 CREATE TABLE IF NOT EXISTS CmCurrentCardStatus (
   RackId TINYINT(1) unsigned,
   SubrackId TINYINT(1) unsigned,
-  CardId TINYINT(1) unsigned,
-  CardState TINYINT(1) unsigned,
-  CardSubType TINYINT(1) unsigned,
-  CardType TINYINT(1) unsigned,
+  CurrentCardId TINYINT(1) unsigned,
+  CurrentCardState TINYINT(1) unsigned,
+  CurrentCardSubType TINYINT(1) unsigned,
+  CurrentCardType TINYINT(1) unsigned,
+  PreviousCardId TINYINT(1) unsigned,
+  PreviousCardState TINYINT(1) unsigned,
+  PreviousCardSubType TINYINT(1) unsigned,
+  PreviousCardType TINYINT(1) unsigned,
   GuiId TINYINT unsigned,
   TimeStamp varchar(30),
   PRIMARY KEY(RackId,SubRackId,CardId,CardState)
