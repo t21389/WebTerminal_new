@@ -48,6 +48,11 @@ CREATE TABLE IF NOT EXISTS Direction (
   OrderTypeValues varchar(10) NOT NULL
   );
 
+  CREATE TABLE IF NOT EXISTS CardType(
+    CardTypeId TINYINT(1) unsigned PRIMARY KEY,
+    CardTypeValues varchar(20) NOT NULL
+  );
+
 INSERT INTO Direction(DirectionId,DirectionValues) VALUES 
 (0, "CM_DIR_DEFAULT"),
 (1, "CM_DIR_EAST"),
@@ -113,3 +118,20 @@ INSERT INTO OrderType(OrderTypeId,OrderTypeValues) VALUES
 (1, "Add"),
 (2, "Delete"),
 (3, "Modify");
+
+INSERT INTO CardType(CardTypeId,CardTypeValues) VALUES
+(1,"MPN Card"),
+(2,"TPC Card"),
+(3,"CSCC Card"),
+(4,"Amplifier"),
+(5,"ILA Card"),
+(6,"Protection Card"),
+(7,"OCM Card"),
+(8,"WSS 1*2 Card"),
+(9,"WSS 2*1*9 Card"),
+(10,"EDFA Card"),
+(11,"MCS Card"),
+(12,"SUPY Card"),
+(13,"WSS 2*1*20 Card"),
+(14,"TPN Card"),
+(15,"WSS2*8*12");

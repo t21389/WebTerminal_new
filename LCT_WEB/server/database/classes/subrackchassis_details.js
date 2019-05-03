@@ -48,8 +48,23 @@ var db=require("./DB");
                 resolve(results.affectedRows);
               }
             });
+          })    
+        }
+        async fetch()
+        {
+          return new Promise(async (resolve, reject) => {
+            let insertquery = `select * FROM SubrackChassisDetails`;
+            db.con.query(insertquery, async function (err, results) {
+              if (err) {
+                console.log(err.message);
+                reject(err);
+              }
+              else {
+                console.log("result", results);
+                resolve(results);
+              }
+            });
           })
-    
         }
     }
     
