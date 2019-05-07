@@ -1,4 +1,4 @@
-var db=require("./DB");
+var db=require("../DB");
 
 class CmWavelengthDetail
   {
