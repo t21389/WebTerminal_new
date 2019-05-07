@@ -1,3 +1,112 @@
+  CREATE TABLE IF NOT EXISTS ChassisType (
+  ChassisTypeId INT unsigned PRIMARY KEY,
+  NoOfSlot INT unsigned default '1',
+  SystemType VARCHAR(20) NOT NULL,
+  SwitchSlot_1 INT unsigned default '0',
+  SwitchSlot_2 INT unsigned default '0'
+);
+
+
+CREATE TABLE IF NOT EXISTS SubrackChassisDetails(
+  RackId INT unsigned,
+  SubRackId INT unsigned,
+  ChassisType INT unsigned,
+  PRIMARY KEY (RackId,SubRackId),
+  CONSTRAINT fk_SubrackChassisDetails_ChassisType
+    FOREIGN KEY (ChassisType)
+    REFERENCES ChassisType(ChassisTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS CardPhysicalDetails (
+  CardType INT unsigned,
+  CardSubType INT unsigned,
+  NoOfSlotsOccupied INT unsigned,
+  PRIMARY KEY (CardType, CardSubType),
+  CONSTRAINT fk_CardPhysicalDetails_CardType
+    FOREIGN KEY (CardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS CmCurrentCardStatus (
+  RackId TINYINT(1) unsigned,
+  SubrackId TINYINT(1) unsigned,
+  CardId TINYINT(1) unsigned,
+  CardState TINYINT(1) unsigned,
+  CardSubType TINYINT(1) unsigned,
+  CardType TINYINT(1) unsigned,
+  GuiId TINYINT(1) unsigned,
+  TimeStamp varchar(30),
+  PRIMARY KEY(RackId,SubRackId,CardId,CardState),
+  CONSTRAINT fk_CmCurrentCardStatus_CardType
+    FOREIGN KEY (CardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS CmClientIntfAdaptInfo (
+  CardId TINYINT(1) unsigned,
+  CardSubType TINYINT(1) unsigned,
+  CardType TINYINT(1) unsigned,
+  ClientIntfId TINYINT(1) unsigned,
+  ClientName varchar(20) default 'NONE',
+  ClientType TINYINT(1) unsigned,
+  GuiId TINYINT(1) unsigned,
+  IntfStatus TINYINT(1) unsigned,
+  LinePortNum TINYINT(1) unsigned,
+  RackId TINYINT(1) unsigned,
+  SubrackId TINYINT(1) unsigned,
+  TimeStamp varchar(30),
+  TributarySetId TINYINT(1) unsigned,
+  PRIMARY Key (RackId, SubrackId, CardId, CardType, CardSubType,ClientIntfId),
+  CONSTRAINT fk_CmClientIntfAdaptInfo_CardType
+    FOREIGN KEY (CardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS CmWavelengthDetail (
+  WavelengthNum TINYINT unsigned PRIMARY KEY,
+  Frequency FLOAT,
+  WavelengthVal FLOAT
+);
+
+CREATE TABLE IF NOT EXISTS CmExpectedConfig (
+NeType SMALLINT unsigned,
+CardType TINYINT(1) unsigned,
+ExpectedFlag tinyint(1) unsigned,
+PRIMARY KEY(NeType,CardType),
+CONSTRAINT fk_CmExpectedConfig_NeType
+    FOREIGN KEY (NeType)
+    REFERENCES NeType(NeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+CONSTRAINT fk_CmExpectedConfig_CardType
+    FOREIGN KEY (CardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+CONSTRAINT fk_CmExpectedConfig_ExpectedFlag
+    FOREIGN KEY (ExpectedFlag)
+    REFERENCES Flag(FlagId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS CmDirString (
+DirVal TINYINT unsigned PRIMARY KEY,
+DirStr varchar(32),
+GuiId TINYINT(1) unsigned,
+TimeStamp varchar(30) NOT NULL
+);
+  
   CREATE TABLE IF NOT EXISTS OtnIntfInfo (
   ukey varchar(2)  default '00',  
   CardId tinyint(3) unsigned NOT NULL default '0',
