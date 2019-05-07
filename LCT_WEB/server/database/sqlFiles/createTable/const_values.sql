@@ -53,6 +53,18 @@ CREATE TABLE IF NOT EXISTS Direction (
     CardTypeValues varchar(20) NOT NULL
   );
 
+  CREATE TABLE IF NOT EXISTS CardSubType(
+    CardSubTypeId TINYINT(1) unsigned PRIMARY KEY,
+    CardSubTypeValues varchar(20) NOT NULL,
+    CardType TINYINT(1) unsigned,
+    PRIMARY KEY(CardSubTypeId,CardType),
+    CONSTRAINT fk_CardSubType_CardType
+    FOREIGN KEY (CardType)
+    REFERENCES CardType(CardTypeId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+  );
+
 INSERT INTO Direction(DirectionId,DirectionValues) VALUES 
 (0, "CM_DIR_DEFAULT"),
 (1, "CM_DIR_EAST"),
@@ -134,4 +146,36 @@ INSERT INTO CardType(CardTypeId,CardTypeValues) VALUES
 (12,"SUPY Card"),
 (13,"WSS 2*1*20 Card"),
 (14,"TPN Card"),
-(15,"WSS2*8*12");
+(15,"WSS2*8*12"),
+(16,"OTDR");
+
+INSERT INTO CardSubType(CardSubTypeId, CardSubTypeValues, CardType) VALUES
+(0,"NA",1),
+(1,"CGM",1),
+(2,"TPN-40G MUXPONDER by AMCC",1),
+(3,"40G MUXPONDER by CORTINA",1),
+(4,"XGM",1),
+(5,"CGX",1),
+(6,"CGMOPX",1),
+(7,"CGXOPX",1),
+(8,"TPN_CCXK_PMCS",1),
+(0,"OCM1x2",7),
+(1,"OCM1x8",7),
+(2,"OCM1x16",7),
+(0,"Finisar Axsun",9),
+(1,"Finisar JDSU",9),
+(2,"JDSU/OPLINK Axsun",9),
+(3,"JDSU/OPLINK JDSU",9),
+(0,"DWDM_MCS_JDSU",11),
+(1,"DWDM_MCS_OPLINK",11),
+(1,"VOIP",12),
+(2,"OCP",12),
+(0,"Finisar Axsun",13),
+(1,"Finisar JDSU",13),
+(2,"JDSU/OPLINK Axsun",13),
+(3,"JDSU/OPLINK JDSU",13),
+(1,"CGM",14),
+(4,"CGC",14),
+(5,"CGX",14),
+(7,"OTDR1x4",16),
+(9,"OTDR1x16",16);
