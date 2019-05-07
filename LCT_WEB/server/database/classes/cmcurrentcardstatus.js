@@ -21,7 +21,7 @@ var db=require("./DB");
         {
     
             return new Promise(async (resolve, reject) => {
-                let updatequery = `UPDATE CmCurrentCardStatus SET CardSubType=?,CardType=?,GuiId=?,TimeStamp=? where RackId=? AND SubrackId=? AND CardId=? AND CardState=?`;
+                let updatequery = `UPDATE CmCurrentCardStatus SET CardSubType=?,CardType=?,GuiId=?,TimeStamp=? where RackId=? AND SubrackId=? AND CurrentCardId=? AND CurrentCardState=?`;
                 db.con.query(updatequery,[this.values[0]["CardSubType"],this.values[0]["CardType"],this.values[0]["GuiId"],this.values[0]["TimeStamp"],this.values[0]["RackId"],this.values[0]["SubrackId"],this.values[0]["CardId"],this.values[0]["CardState"]], async function (err, results) {
                   if (err) {
                     console.log(err.message);
@@ -71,7 +71,7 @@ var db=require("./DB");
     
     module.exports={CmCurrentCardStatus}
     
-//  var o=[{RackId:2,SubrackId:1,CurrentCardId:1,CurrentCardState:2,CurrentCardSubType:1,CurrentCardType:3,PreviousCardId:2,PreviousCardState:1,PreviousCardSubType:1,PreviousCardType:1,GuiId:1,TimeStamp:"oooooobbhcvu"}];
+//  var o=[{RackId:2,SubrackId:1,CardId:1,CardState:2,CardSubType:1,CardType:3,GuiId:1,TimeStamp:"oooooobbhcvu"}];
 //     var o_d=new CmCurrentCardStatus(o);
 //     //o_d.insert();
 //     o_d.update();

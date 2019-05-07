@@ -50,12 +50,12 @@ CREATE TABLE IF NOT EXISTS Direction (
 
   CREATE TABLE IF NOT EXISTS CardType(
     CardTypeId TINYINT(1) unsigned PRIMARY KEY,
-    CardTypeValues varchar(20) NOT NULL
+    CardTypeValues varchar(30) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS CardSubType(
-    CardSubTypeId TINYINT(1) unsigned PRIMARY KEY,
-    CardSubTypeValues varchar(20) NOT NULL,
+    CardSubTypeId TINYINT(1) unsigned,
+    CardSubTypeValues varchar(30) NOT NULL,
     CardType TINYINT(1) unsigned,
     PRIMARY KEY(CardSubTypeId,CardType),
     CONSTRAINT fk_CardSubType_CardType
@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS Direction (
     ON DELETE CASCADE
     ON UPDATE CASCADE
   );
+
 
 INSERT INTO Direction(DirectionId,DirectionValues) VALUES 
 (0, "CM_DIR_DEFAULT"),
