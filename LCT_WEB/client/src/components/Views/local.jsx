@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./../../css/discovery.css";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import socketIOClient from "socket.io-client"; 
+
 class Local extends React.Component {
   constructor(props) {
     super(props);
@@ -8,7 +11,9 @@ class Local extends React.Component {
     this.state = {
       value: "select",
       interfaceJson: "",
-      isChecked: props.isChecked || false
+      isChecked: props.isChecked || false,
+      response:false,
+      endpoint: "http://127.0.0.1:4001"
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -25,12 +30,26 @@ class Local extends React.Component {
     });
   }
 
+  state=
+  {
+    loggedIn:false
+  }
+loggedInHandle=() =>{
+// this.setState({loggedIn :true})
+
+
+const { endpoint } = this.state;
+    const socket = socketIOClient(endpoint);
+    socket.on("FromAPI", data => this.setState({ response: data }));
+}
   render() {
     var jsonString = this.props.interfaceJson;
     console.log("interfaceJson final***********: ", jsonString);
     console.log("length====>", jsonString.length);
-
+    const { response }=this.state;
+    console.log("response from the socket server is :" +response);
     return (
+      <Router>
       <div>
         <form>
           <div class="form-group">
@@ -44,8 +63,7 @@ class Local extends React.Component {
                 console.log("test" + jsonObject);
                 return (
                   <option>
-                    {jsonObject.Interface_address},
-                    {jsonObject.Interface_netmask}
+                    {jsonObject.Interface_name}, {jsonObject.Interface_address}
                   </option>
                 );
               })}
@@ -64,14 +82,27 @@ class Local extends React.Component {
           </div>
 
           <div class="col-lg-12 loginbttm">
-            <div class="col-lg-6 login-btm login-button">
-              <button type="submit" class="btn btn-outline-primary">
-                LOGIN
-              </button>
+            <div class="col-lg-12 login-btm login-button">
+              <Link to="/about/">
+                <button type="submit" class="btn btn-outline-primary" onClick={this.loggedInHandle.bind(this)}>
+                  SUBMIT
+                </button>
+              </Link>
             </div>
+          </div>
+          <div style={{textAlign: "center"}}>
+          {
+            response
+            ?<p>
+              Date:{response}
+              </p>
+              :
+              <p> Socket Not Connected</p>
+          }
           </div>
         </form>
       </div>
+      </Router>
     );
   }
 }

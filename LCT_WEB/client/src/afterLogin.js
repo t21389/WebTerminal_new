@@ -2,13 +2,6 @@ import React, {
   Component
 } from 'react';
 
-// import {
-
-//   Route,
-//   Link,
-//   BrowserRouter
-
-// } from 'react-router-dom'
 import './App.css';
 import Discovery from './components/Views/discovery';
 import Footer from './components/Footer/footer';
@@ -21,42 +14,42 @@ import Login from './components/Views/login';
 
 
 
-class App extends Component {
+class AfterLogin extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // messageNew: "",
-      // message: "",
-      // activeModeColor: "white"
+      messageNew: "",
+      message: "",
+      activeModeColor: "white"
     };
   }
 
 
-  // componentWillMount() {
-  //   this.setState({
-  //     messageNew: < Login/ >
-  //   })
-  // }
+  componentWillMount() {
+    this.setState({
+      messageNew: < Topology / >
+    })
+  }
 
-  // componentWillReceiveProps(props) {
-  //   console.log('rcv props', props)
-  // }
+  componentWillReceiveProps(props) {
+    console.log('rcv props', props)
+  }
 
-  // fromSideBarChild(params) {
+  fromSideBarChild(params) {
 
-  //   console.log('fromSideBarChild', params);
-  //   this.setState({
-  //     messageNew: params
+    console.log('fromSideBarChild', params);
+    this.setState({
+      messageNew: params
 
-  //   })
+    })
 
-  // }
+  }
 
   render() {
-
+    console.log("Inside New Comp")
     return ( < div >
-    <Login/>
-      {/* <
+
+      <
       NavBar callback = {
         this.fromSideBarChild.bind(this)
       }
@@ -67,12 +60,13 @@ class App extends Component {
       Main messageNew = {
         this.state.messageNew
       }
-      /> */}
+      />
 
-     
+      <
+      Footer / >
       <
       /div>
     );
   }
 }
-export default App;
+export default AfterLogin;

@@ -1,0 +1,25 @@
+.new{
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    cursor: pointer;
+    margin-top: 12px;
+    margin-bottom: 12px;
+   margin-left: 370px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 5px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-image:linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%,#e3eeff 100%);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}

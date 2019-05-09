@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import "./../../css/discovery.css";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 class Remote extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      value: "select"
+      value: "select",
+      inputField: "",
+      isChecked: props.isChecked || false
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeInput = this.handleChangeInput.bind(this);
   }
 
   onChange(e) {
@@ -14,6 +20,15 @@ class Remote extends React.Component {
       value: e.target.value
     });
   }
+  handleChange() {
+    this.setState({ isChecked: !this.state.isChecked });
+  }
+  handleChangeInput(event) {
+    this.setState({
+      inputField: event.target.value
+    });
+  }
+
   render() {
     var jsonString = this.props.interfaceJson;
     return (
@@ -22,28 +37,49 @@ class Remote extends React.Component {
           <form>
             <div class="form-group">
               <label htmlFor="select1">IP</label>
-              <select
+              {/* <select
                 value={this.state.value}
                 onChange={this.onChange.bind(this)}
                 className="form-control"
               >
                 {jsonString.value.map(jsonObject => {
                 console.log("test" + jsonObject);
-                return (
-                  <option>
-                    {jsonObject.Interface_netmask}
-                  </option>
-                );
+                return 
+                  // <option>
+
+                  //   {jsonObject.Interface_netmask}
+                  // </option>
+                
               })}
-              </select>
+              </select> */}
+              <input
+                type="text" required pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$"
+                className="form-control"
+                id="theInput"
+                value={this.state.inputField}
+                onChange={this.handleChangeInput}
+              /> 
+
+            </div>
+            <div class="form-group">
+              <h6>SDN Enabled</h6>
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  value={this.state.isChecked}
+                  onChange={this.handleChange}
+                />
+                <div className="slider" />
+              </label>
             </div>
 
             <div class="col-lg-12 loginbttm">
-              <div class="col-lg-6 login-btm login-text" />
-              <div class="col-lg-6 login-btm login-button">
-                <button type="submit" class="btn btn-outline-primary">
-                  LOGIN
-                </button>
+              <div class="col-lg-12 login-btm login-button">
+                {/* <Link to="/about/">
+                  <button type="submit" class="btn btn-outline-primary">
+                  SUBMIT
+                  </button>
+                </Link> */}
               </div>
             </div>
           </form>

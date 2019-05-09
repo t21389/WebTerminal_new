@@ -1,0 +1,72 @@
+.newrow {
+    background-color: darkcyan;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+    margin-top: 65px;
+    text-align: center;
+    width: 500px;
+
+
+}
+
+.keylo {
+    height: 80px;
+    font-size: 80px;
+    line-height: 80px;
+    background: -webkit-linear-gradient(#27EF9F, #0DB8DE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.head h2 {
+    color: #ffffff;
+}
+
+
+h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+
+.modalbody {
+    position: relative;
+    padding: 15px;
+}
+
+.addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+}
+
+.group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    margin-bottom: 15px;
+}
+.title h1{
+    margin-top:5px;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color:white;
+}
