@@ -21,8 +21,8 @@ var db=require("../DB");
         {
     
             return new Promise(async (resolve, reject) => {
-                let updatequery = `UPDATE CmCurrentCardStatus SET CardSubType=?,CardType=?,GuiId=?,TimeStamp=? where RackId=? AND SubrackId=? AND CurrentCardId=? AND CurrentCardState=?`;
-                db.con.query(updatequery,[this.values[0]["CardSubType"],this.values[0]["CardType"],this.values[0]["GuiId"],this.values[0]["TimeStamp"],this.values[0]["RackId"],this.values[0]["SubrackId"],this.values[0]["CardId"],this.values[0]["CardState"]], async function (err, results) {
+                let updatequery = `UPDATE CmCurrentCardStatus SET CardSubType=?,CardType=?,GuiId=?,TimeStamp=?,RackId=?,SubrackId=?,CardId=?,CardState=? where UniqueCardKey=?`;
+                db.con.query(updatequery,[this.values[0]["CardSubType"],this.values[0]["CardType"],this.values[0]["GuiId"],this.values[0]["TimeStamp"],this.values[0]["RackId"],this.values[0]["SubrackId"],this.values[0]["CardId"],this.values[0]["CardState"],this.values[0]["UniqueCardKey"]], async function (err, results) {
                   if (err) {
                     console.log(err.message);
                     reject(err);
@@ -37,8 +37,8 @@ var db=require("../DB");
         async delete()
         {
           return new Promise(async (resolve, reject) => {
-            let insertquery = `DELETE FROM CmCurrentCardStatus where RackId=? AND SubrackId=? AND CardId=? AND CardState=?`;
-            db.con.query(insertquery, [this.values[0]["RackId"],this.values[0]["SubrackId"],this.values[0]["CardId"],this.values[0]["CardState"]], async function (err, results) {
+            let insertquery = `DELETE FROM CmCurrentCardStatus where UniqueCardKey=?`;
+            db.con.query(insertquery, [this.values[0]["UniqueCardKey"]], async function (err, results) {
               if (err) {
                 console.log(err.message);
                 reject(err);

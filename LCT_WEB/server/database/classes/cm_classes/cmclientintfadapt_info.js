@@ -21,8 +21,8 @@
             async update()
             {
               return new Promise(async (resolve, reject) => {
-                  let updatequery = `UPDATE CmClientIntfAdaptInfo SET ClientName=?,ClientType=?,GuiId=?,IntfStatus=?,LinePortNum=?,TimeStamp=?,TributarySetId=? where RackId=? AND SubrackId=? AND CardId=? AND CardSubType=? AND CardType=? AND ClientIntfId=?`;
-                  db.con.query(updatequery,[this.values[0]["ClientName"],this.values[0]["ClientType"],this.values[0]["GuiId"],this.values[0]["IntfStatus"],this.values[0]["LinePortNum"],this.values[0]["TimeStamp"],this.values[0]["TributarySetId"],this.values[0]["RackId"],this.values[0]["SubrackId"],this.values[0]["CardId"],this.values[0]["CardSubType"],this.values[0]["CardType"],this.values[0]["ClientIntfId"]], async function (err, results) {
+                  let updatequery = `UPDATE CmClientIntfAdaptInfo SET ClientName=?,ClientType=?,GuiId=?,IntfStatus=?,LinePortNum=?,TimeStamp=?,TributarySetId=? where UniqueCardKey=? AND ClientIntfId=?`;
+                  db.con.query(updatequery,[this.values[0]["ClientName"],this.values[0]["ClientType"],this.values[0]["GuiId"],this.values[0]["IntfStatus"],this.values[0]["LinePortNum"],this.values[0]["TimeStamp"],this.values[0]["TributarySetId"],this.values[0]["UniqueCardKey"],this.values[0]["ClientIntfId"]], async function (err, results) {
                     if (err) {
                       console.log(err.message);
                       reject(err);
@@ -37,8 +37,8 @@
             async delete()
             {
               return new Promise(async (resolve, reject) => {
-                let insertquery = `DELETE FROM CmClientIntfAdaptInfo where RackId=? AND SubrackId=? AND CardId=? AND CardSubType=? AND CardType=? AND ClientIntfId=?`;
-                db.con.query(insertquery, [this.values[0]["RackId"],this.values[0]["SubrackId"],this.values[0]["CardId"],this.values[0]["CardSubType"],this.values[0]["CardType"],this.values[0]["ClientIntfId"]], async function (err, results) {
+                let insertquery = `DELETE FROM CmClientIntfAdaptInfo where UniqueCardKey=? AND ClientIntfId=?`;
+                db.con.query(insertquery, [this.values[0]["UniqueCardKey"],this.values[0]["ClientIntfId"]], async function (err, results) {
                   if (err) {
                     console.log(err.message);
                     reject(err);
