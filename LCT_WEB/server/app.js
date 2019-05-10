@@ -1,82 +1,74 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var route = require('./route/route');
-const path = require('path');
-const port = 1234;
-const port1 = 4001;
-const http = require("http");
-const socketIo = require("socket.io");
-const axios = require("axios");
-
+var route = require("./route/route");
+const path = require("path");
+const cors = require("cors");
 const app = express();
-const index = require("./route/index");
+const WebSocket = require("ws");
 
+// routes
+const msroute = require("./route/msroute");
+//config
+const config = require("./config");
 
-// const date = new Date();
-// let hours = date.getHours();
-
-
-function getDateTime() {
-
-    var date = new Date();
-
-    var hour = date.getHours();
-    hour = (hour < 10 ? "0" : "") + hour;
-
-    var min = date.getMinutes();
-    min = (min < 10 ? "0" : "") + min;
-
-    var sec = date.getSeconds();
-    sec = (sec < 10 ? "0" : "") + sec;
-
-    var year = date.getFullYear();
-
-    var month = date.getMonth() + 1;
-    month = (month < 10 ? "0" : "") + month;
-
-    var day = date.getDate();
-    day = (day < 10 ? "0" : "") + day;
-
-    return year + ":" + month + ":" + day + " Time: " + hour + ":" + min + ":" + sec;
-
-}
-
-app.use(index);
-const server = http.createServer(app);
-const io = socketIo(server);
-io.on("connection", socket => {
-    console.log("New client connected"), setInterval(
-        () => getApiAndEmit(socket),
-        10000
-    );
-    socket.on("disconnect", () => console.log("Client disconnected"));
-});
-
-const getApiAndEmit = async socket => {
-    try {
-        var t = getDateTime();
-        console.log("before" + t);
-        socket.emit("FromAPI", t);
-    } catch (error) {
-        console.error(`Error: ${error.code}`);
-    }
-};
-server.listen(port1, () => console.log(`Listening on port ${port1}`));
-
-
-//app.set('view engine', 'ejs');
-app.get('/', (req, resp) => {
-    resp.render('index');
-});
+//middleware
+app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
+app.use(
+  bodyParser.urlencoded({
     extended: "false"
-}));
+  })
+);
 
+app.get("/", (req, resp) => {
+  resp.render("index");
+});
 
-app.use('/api', route);
-app.listen(port, () => {
-    console.log(' server is running on port ' + port);
+app.use("/api", route);
+app.use("/ms", msroute);
+
+// set the app to listen on the port
+const server = app.listen(config.port, () => {
+  console.log(`Server running on port: ${config.port}`);
+});
+
+// Loading socket.io
+const io = require("socket.io").listen(server);
+
+// When a client connects, we note it in the console
+io.sockets.on("connection", function(socket) {
+  console.log("Browser client is connected with client Id :", socket.id);
+
+  socket.emit("message", "Hello dear Client");
+
+  // When the server receives a “message” type signal from the client
+  socket.on("message", function(message) {
+    console.log("Message received from browser : " + message);
+    socket.emit("message", "Server sending message to browser");
+  });
+
+  socket.on("disconnect", function() {
+    console.log("Browser client got disconnected!");
+  });
+});
+
+// socket for communicating with node server
+const ws = new WebSocket(config.server_socket_add);
+const socketHandlerFromSystem = require("./controller/socketHandlerFromSystem");
+
+ws.on("open", function open() {
+  console.log("connected to akshay");
+  ws.send(Date.now());
+});
+
+ws.on("close", function close() {
+  console.log("disconnected from akshay");
+});
+
+ws.on("message", function incoming(data) {
+  console.log("data :", data);
+  let res = JSON.parse(data);
+  socketHandlerFromSystem.fHandleSocketFromSystem(res.OpCode);
 });
 
 module.exports = app;

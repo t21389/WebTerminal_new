@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./../../css/discovery.css";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import socketIOClient from "socket.io-client"; 
+import socketIOClient from "socket.io-client";
 
 class Local extends React.Component {
   constructor(props) {
@@ -12,8 +12,8 @@ class Local extends React.Component {
       value: "select",
       interfaceJson: "",
       isChecked: props.isChecked || false,
-      response:false,
-      endpoint: "http://127.0.0.1:4001"
+      response: false,
+      endpoint: "http://127.0.0.1:1234"
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -30,78 +30,78 @@ class Local extends React.Component {
     });
   }
 
-  state=
-  {
-    loggedIn:false
-  }
-loggedInHandle=() =>{
-// this.setState({loggedIn :true})
+  state = {
+    loggedIn: false
+  };
+  loggedInHandle = () => {
+    // this.setState({loggedIn :true})
 
-
-const { endpoint } = this.state;
+    const { endpoint } = this.state;
     const socket = socketIOClient(endpoint);
-    socket.on("FromAPI", data => this.setState({ response: data }));
-}
+    socket.on("message", data => this.setState({ response: data }));
+  };
   render() {
     var jsonString = this.props.interfaceJson;
     console.log("interfaceJson final***********: ", jsonString);
     console.log("length====>", jsonString.length);
-    const { response }=this.state;
-    console.log("response from the socket server is :" +response);
+    const { response } = this.state;
+    console.log("response from the socket server is :" + response);
     return (
       <Router>
-      <div>
-        <form>
-          <div class="form-group">
-            <label htmlFor="select1">Interface</label>
-            <select
-              value={this.state.value}
-              onChange={this.onChange.bind(this)}
-              className="form-control"
-            >
-              {jsonString.value.map(jsonObject => {
-                console.log("test" + jsonObject);
-                return (
-                  <option>
-                    {jsonObject.Interface_name}, {jsonObject.Interface_address}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div class="form-group">
-            <h6>SDN Enabled</h6>
-            <label className="switch">
-              <input
-                type="checkbox"
-                value={this.state.isChecked}
-                onChange={this.handleChange}
-              />
-              <div className="slider" />
-            </label>
-          </div>
-
-          <div class="col-lg-12 loginbttm">
-            <div class="col-lg-12 login-btm login-button">
-              <Link to="/about/">
-                <button type="submit" class="btn btn-outline-primary" onClick={this.loggedInHandle.bind(this)}>
-                  SUBMIT
-                </button>
-              </Link>
+        <div>
+          <form>
+            <div class="form-group">
+              <label htmlFor="select1">Interface</label>
+              <select
+                value={this.state.value}
+                onChange={this.onChange.bind(this)}
+                className="form-control"
+              >
+                {jsonString.value.map(jsonObject => {
+                  console.log("test" + jsonObject);
+                  return (
+                    <option>
+                      {jsonObject.Interface_name},{" "}
+                      {jsonObject.Interface_address}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
-          </div>
-          <div style={{textAlign: "center"}}>
-          {
-            response
-            ?<p>
-              Date:{response}
-              </p>
-              :
-              <p> Socket Not Connected</p>
-          }
-          </div>
-        </form>
-      </div>
+            <div class="form-group">
+              <h6>SDN Enabled</h6>
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  value={this.state.isChecked}
+                  onChange={this.handleChange}
+                />
+                <div className="slider" />
+              </label>
+            </div>
+
+            <div class="col-lg-12 loginbttm">
+              <div class="col-lg-12 login-btm login-button">
+                <Link to="/about/">
+                  <button
+                    type="submit"
+                    class="btn btn-outline-primary"
+                    onClick={this.loggedInHandle.bind(this)}
+                  >
+                    SUBMIT
+                  </button>
+                </Link>
+              </div>
+            </div>
+            <div style={{ textAlign: "center" }}>
+              {response ? (
+                <p>Response from Socket :{response}</p>
+              ) : (
+                <p> Socket Not Connected</p>
+              )}
+            </div>
+          </form>
+        </div>
       </Router>
     );
   }
