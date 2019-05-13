@@ -10,6 +10,7 @@ import NavBar from './components/Views/navBar';
 import Main from './components/Views/main';
 import Topology from './components/Views/topology';
 import Login from './components/Views/login';
+import Theme from './components/Views/theme';
 
 
 
@@ -20,6 +21,7 @@ class AfterLogin extends Component {
     this.state = {
       messageNew: "",
       message: "",
+      backgroundColor:"black",
       activeModeColor: "white"
     };
   }
@@ -45,19 +47,35 @@ class AfterLogin extends Component {
 
   }
 
+activateMode = mode => {
+   console.log("mode clicked ",mode)
+ 
+   this.setState({
+     activeModeColor:mode
+   })
+ 
+ };
+  handleBkgColor= color =>{
+   console.log('selected color=>', color);
+
+   this.setState({
+     backgroundColor:color
+   })
+ };
+ 
   render() {
     console.log("Inside New Comp")
     return ( < div >
 
       <
-      NavBar callback = {
+      NavBar  color={this.state.backgroundColor}  callback = {
         this.fromSideBarChild.bind(this)
       }
       />
-
+      <Theme  activateModeHandler = {this.activateMode} handleBgClick={this.handleBkgColor}/>
 
       <
-      Main messageNew = {
+      Main mainThemeColor={this.state.activeModeColor} messageNew = { 
         this.state.messageNew
       }
       />

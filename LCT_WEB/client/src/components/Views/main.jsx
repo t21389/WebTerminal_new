@@ -11,9 +11,13 @@ class Main extends Component {
   }
 
   render() {
+    const themeBgColor = {
+      background:  this.props.mainThemeColor
+  };
+  console.log("themeBgColor ", themeBgColor);
     console.log("*******" + this.props.messageNew);
     return (
-      <div class="main-panel">
+      <div class="main-panel" style={themeBgColor}>
         <div class="content">{this.props.messageNew}</div>
       </div>
     );

@@ -48,17 +48,17 @@ class Discovery extends React.Component {
         break;
       case 2:
         {
-          console.log("event 2: callinterface", this.props);
-          this.props.callback(Component).then(resp => {
-            console.log("response finalR ", JSON.parse(resp));
-            console.log("**********" + resp);
-            let response = JSON.parse(resp);
-            //response.push({ dummy: "value" });
-            this.setState({
-              interfaceJson: response
-            });
+          // console.log("event 2: callinterface", this.props);
+          // this.props.callback(Component).then(resp => {
+          //   console.log("response finalR ", JSON.parse(resp));
+          //   console.log("**********" + resp);
+          //   let response = JSON.parse(resp);
+          //   //response.push({ dummy: "value" });
+          //   this.setState({
+          //     interfaceJson: response
+          //   });
             this.toggleDivRemote();
-          });
+        
 
           console.log(
             "this.state.interfaceJson[0] :" + this.state.interfaceJson

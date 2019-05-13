@@ -28,6 +28,9 @@ class Remote extends React.Component {
       inputField: event.target.value
     });
   }
+  loggedInHandle = () => {
+    this.setState({ loggedIn: true });
+  };
 
   render() {
     var jsonString = this.props.interfaceJson;
@@ -37,29 +40,15 @@ class Remote extends React.Component {
           <form>
             <div class="form-group">
               <label htmlFor="select1">IP</label>
-              {/* <select
-                value={this.state.value}
-                onChange={this.onChange.bind(this)}
-                className="form-control"
-              >
-                {jsonString.value.map(jsonObject => {
-                console.log("test" + jsonObject);
-                return 
-                  // <option>
-
-                  //   {jsonObject.Interface_netmask}
-                  // </option>
-                
-              })}
-              </select> */}
               <input
-                type="text" required pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$"
+                type="text"
+                required
+                pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$"
                 className="form-control"
                 id="theInput"
                 value={this.state.inputField}
                 onChange={this.handleChangeInput}
-              /> 
-
+              />
             </div>
             <div class="form-group">
               <h6>SDN Enabled</h6>
@@ -75,11 +64,13 @@ class Remote extends React.Component {
 
             <div class="col-lg-12 loginbttm">
               <div class="col-lg-12 login-btm login-button">
-                {/* <Link to="/about/">
-                  <button type="submit" class="btn btn-outline-primary">
+                <button
+                  type="submit"
+                  onClick={this.loggedInHandle.bind(this)}
+                  class="btn btn-outline-primary"
+                >
                   SUBMIT
-                  </button>
-                </Link> */}
+                </button>
               </div>
             </div>
           </form>

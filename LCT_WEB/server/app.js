@@ -36,10 +36,23 @@ const server = app.listen(config.port, () => {
 const io = require("socket.io").listen(server);
 
 // When a client connects, we note it in the console
-io.sockets.on("connection", function(socket) {
-  console.log("Browser client is connected with client Id :", socket.id);
+io.sockets.on("connection",socket => {
+  console.log("Browser client is connected with client Id :", socket.id), setInterval(
+    () => getApiAndEmit(socket),
+    10000
+  );
+  //  function(socket) {
+  // console.log("Browser client is connected with client Id :", socket.id);
 
-  socket.emit("message", "Hello dear Client");
+  const getApiAndEmit = async socket => {
+    try {
+      const res = "Hello dear Client";
+      socket.emit("FromAPI", res);
+    } catch (error) {
+      console.error(`Error: ${error.code}`);
+    }
+  };
+  // socket.emit("message", "Hello dear Client");
 
   // When the server receives a “message” type signal from the client
   socket.on("message", function(message) {
@@ -53,22 +66,22 @@ io.sockets.on("connection", function(socket) {
 });
 
 // socket for communicating with node server
-const ws = new WebSocket(config.server_socket_add);
-const socketHandlerFromSystem = require("./controller/socketHandlerFromSystem");
+// const ws = new WebSocket(config.server_socket_add);
+// const socketHandlerFromSystem = require("./controller/socketHandlerFromSystem");
 
-ws.on("open", function open() {
-  console.log("connected to akshay");
-  ws.send(Date.now());
-});
+// ws.on("open", function open() {
+//   console.log("connected to akshay");
+//   ws.send(Date.now());
+// });
 
-ws.on("close", function close() {
-  console.log("disconnected from akshay");
-});
+// ws.on("close", function close() {
+//   console.log("disconnected from akshay");
+// });
 
-ws.on("message", function incoming(data) {
-  console.log("data :", data);
-  let res = JSON.parse(data);
-  socketHandlerFromSystem.fHandleSocketFromSystem(res.OpCode);
-});
+// ws.on("message", function incoming(data) {
+//   console.log("data :", data);
+//   let res = JSON.parse(data);
+//   socketHandlerFromSystem.fHandleSocketFromSystem(res.OpCode);
+// });
 
 module.exports = app;

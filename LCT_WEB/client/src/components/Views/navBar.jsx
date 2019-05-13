@@ -10,6 +10,7 @@ import Main from "./main";
 import Discovery from "./discovery";
 import "./../../css/navbar.css";
 import Topology from "./topology";
+import NEList from "./NEList";
 
 class NavBar extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class NavBar extends Component {
     this.state = {
       orderIddata: "",
       message: "",
-      displayMenu: false
+      displayMenu: false,
+      color: "red"
     };
 
     this.showDropdownMenu = this.showDropdownMenu.bind(this);
@@ -128,18 +130,12 @@ class NavBar extends Component {
     });
   }
   render() {
+    const sidebarColorStyle = {
+      background: this.props.color
+    };
     return (
       <div>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-          {/* <a class="navbar-brand" href="#">
-              <img
-                src={require("./../../assets/logo.svg")}
-                width="30"
-                height="30"
-                alt=""
-              />
-            </a> */}
-
+        <nav class="navbar navbar-expand-md" style={sidebarColorStyle}>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item" className="link">
@@ -166,6 +162,20 @@ class NavBar extends Component {
                 >
                   <i class="fa fa-random" />
                   <span class="ml-2">DISCOVERY</span>
+                </button>
+              </li>
+              <li class="nav-item" className="link">
+                <button
+                  type="submit"
+                  onClick={this.clickHand.bind(
+                    this,
+                    <NEList callback={this.CallForInterface.bind(this)} />
+                  )}
+                  class="btn btn-danger navbar-btn"
+                  className="btn-hover color-1"
+                >
+                  <i class="fa fa-random" />
+                  <span class="ml-2">NE Info.</span>
                 </button>
               </li>
 
