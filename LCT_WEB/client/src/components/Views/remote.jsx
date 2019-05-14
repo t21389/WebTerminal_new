@@ -27,8 +27,21 @@ class Remote extends React.Component {
       inputField: event.target.value
     });
   }
-  loggedInHandle = () => {
-    this.setState({ loggedIn: true });
+  loggedInHandle = e => {
+    e.preventDefault();
+    console.log("Sending request to server");
+
+    fetch("/ms/getNetworkList", {
+      method: "post",
+      body: JSON.stringify({ ip: this.state.inputField }),
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        console.log({ response });
+      });
   };
 
   render() {
