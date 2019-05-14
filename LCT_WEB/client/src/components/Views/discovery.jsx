@@ -40,7 +40,6 @@ class Discovery extends React.Component {
             });
             this.toggleDiv();
           });
-
           console.log(
             "this.state.interfaceJson[0] :" + this.state.interfaceJson
           );
@@ -48,23 +47,14 @@ class Discovery extends React.Component {
         break;
       case 2:
         {
-          // console.log("event 2: callinterface", this.props);
-          // this.props.callback(Component).then(resp => {
-          //   console.log("response finalR ", JSON.parse(resp));
-          //   console.log("**********" + resp);
-          //   let response = JSON.parse(resp);
-          //   //response.push({ dummy: "value" });
-          //   this.setState({
-          //     interfaceJson: response
-          //   });
-            this.toggleDivRemote();
-        
-
+          this.toggleDivRemote();
           console.log(
             "this.state.interfaceJson[0] :" + this.state.interfaceJson
           );
         }
         break;
+      default: {
+      }
     }
   }
 
@@ -85,7 +75,6 @@ class Discovery extends React.Component {
   };
 
   render() {
-    // console.log("rerender " + this.state.interfaceJson);
     return (
       <div>
         <div class="container">
@@ -97,24 +86,16 @@ class Discovery extends React.Component {
               </div>
               <div class="col-lg-12 login-title">
                 <h1>Optical Transport Controller</h1>
-                
 
                 <div class="row">
                   <div class="col-md-6">
-                    <button
-                      // onClick={this.toggleDiv}
-                      onClick={this.clickHandler.bind(this, 1)}
-                    >
+                    <button onClick={this.clickHandler.bind(this, 1)}>
                       Local
                     </button>
                   </div>
                   <div class="col-md-6">
-                    <button
-                      // onClick={this.toggleDiv}
-                      onClick={this.clickHandler.bind(this, 2)}
-                    >
+                    <button onClick={this.clickHandler.bind(this, 2)}>
                       Remote
-                      {/* <button onClick={this.toggleDivRemote}>Remote</button> */}
                     </button>
                   </div>
                 </div>

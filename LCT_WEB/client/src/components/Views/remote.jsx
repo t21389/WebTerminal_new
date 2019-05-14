@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./../../css/discovery.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Remote extends React.Component {
   constructor(props) {
@@ -33,7 +32,6 @@ class Remote extends React.Component {
   };
 
   render() {
-    var jsonString = this.props.interfaceJson;
     return (
       <div>
         <div class="col-lg-12 login-form">

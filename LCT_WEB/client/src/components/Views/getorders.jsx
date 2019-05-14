@@ -54,7 +54,7 @@ class GetOrders extends React.Component{
 
 
   render() {
-    // console.log("rerender " + this.state.interfaceJson1);
+
     return (
       <div>
         <div class="container">

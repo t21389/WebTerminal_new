@@ -3,17 +3,11 @@ import React, {
 } from 'react';
 
 import './App.css';
-import Discovery from './components/Views/discovery';
 import Footer from './components/Footer/footer';
-import Getorders from './components/Views/getorders';
 import NavBar from './components/Views/navBar';
 import Main from './components/Views/main';
 import Topology from './components/Views/topology';
-import Login from './components/Views/login';
 import Theme from './components/Views/theme';
-
-
-
 
 class AfterLogin extends Component {
   constructor(props) {
@@ -82,8 +76,7 @@ activateMode = mode => {
 
       <
       Footer / >
-      <
-      /div>
+      </div>
     );
   }
 }

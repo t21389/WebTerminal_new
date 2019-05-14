@@ -1,6 +1,7 @@
 .main-panel>.content {
-    padding:80px;
     min-height: calc(100vh - 70px);
+    margin-top: 40px;
+    margin-left: 0px;
 
 
 }

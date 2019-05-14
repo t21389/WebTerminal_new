@@ -10,21 +10,6 @@ class Theme extends Component {
     };
   }
 
-
-  // activateMode = mode => {
-  //   console.log("mode clicked ",mode)
-  //   console.log(document.body.classList)
-  //   switch (mode) {
-  //     case "light":
-  //       document.body.classList.add("white-content");
-  //       break;
-  //     default:
-  //       document.body.classList.remove("white-content");
-  //       break;
-  //   }
-  // };
-
-
   handleClick = () => {
     
     if (this.state.classes === "dropdown-menu") {
@@ -94,8 +79,6 @@ class Theme extends Component {
                 />
                 <span class="color-label">DARK MODE</span>
               </li>
-
-              {/* <li class="header-title">Want more components?</li> */}
             </ul>
             </div>
             </div>

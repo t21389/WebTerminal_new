@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import "./../../css/login.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
-import Main from "./main";
-import Discovery from "./discovery";
-import NavBar from "./navBar";
+import { BrowserRouter as Router,Route,Link,Redirect} from "react-router-dom";
 
 class Login extends React.Component {
   constructor(props) {
@@ -85,8 +77,6 @@ class Login extends React.Component {
                         </div>
 
                         <div class="form-group text-center">
-            
-        
                           <Link to="/login">
                             <button
                               type="submit"

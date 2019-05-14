@@ -44,3 +44,9 @@
     border-radius: 4px;
     margin-left: 4px;
 }
+
+.head h3 {
+    font-size: 1.05rem;
+    margin-bottom: .5rem;
+    margin-top: 10px;
+}

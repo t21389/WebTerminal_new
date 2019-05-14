@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "jquery/dist/jquery.min.js";
@@ -8,8 +7,6 @@ import "font-awesome/css/font-awesome.min.css";
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route,Switch,} from "react-router-dom";
 import AfterLogin from './afterLogin';
-import Discovery from './components/Views/discovery';
-
 
 ReactDOM.render((
     <Router>
@@ -17,7 +14,6 @@ ReactDOM.render((
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/login" component={AfterLogin} />
-       
           </Switch>
       </div>
     </Router>

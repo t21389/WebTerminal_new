@@ -1,7 +1,3 @@
-/* eslint-disable default-case */
-/* eslint-disable no-unreachable */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-lone-blocks */
 import React, { Component } from "react";
 import GetOrders from "./getorders";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -11,6 +7,7 @@ import Discovery from "./discovery";
 import "./../../css/navbar.css";
 import Topology from "./topology";
 import NEList from "./NEList";
+import AppNew from "./app";
 
 class NavBar extends Component {
   constructor(props) {
@@ -30,24 +27,6 @@ class NavBar extends Component {
     //console.log('Clicked Here', event);
     this.props.callback(event);
   }
-  // clickHandler(event, Component) {
-  //   console.log("clicked Here", event, "and", this.props);
-
-  // //   switch (event) {
-  // //     case 1:
-  // //       {
-  // //         console.log("event 1 :CallForOrderId", this.props);
-  // //         this.props.callbackI(Component).then(resp => {
-  // //           console.log("response final", resp);
-  // //           this.setState({
-  // //             orderIddata: resp
-  // //           });
-  // //           this.props.DisplayOrderIdData(<GetOrders orderIddata={resp} />);
-  // //         });
-  // //       }
-  // //       break;
-  // //   }
-  // }
   CallForInterface = async params => {
     const response = await this.callApi(1);
     console.log("response1<<<<<<<<<<" + response);
@@ -95,18 +74,6 @@ class NavBar extends Component {
           return body2;
         }
         break;
-      // case 3:
-      // {
-      //   console.log("event 1 :CallForOrderId", this.props);
-      //           this.props.callbackI(Component).then(resp => {
-      //             console.log("response final", resp);
-      //             this.setState({
-      //               orderIddata: resp
-      //             });
-      //             this.props.DisplayOrderIdData(<GetOrders orderIddata={resp} />);
-      //           });
-      // }
-      // break;
     }
   };
 
@@ -182,11 +149,15 @@ class NavBar extends Component {
               <li class="nav-item" className="link">
                 <button
                   type="submit"
+                  onClick={this.clickHand.bind(
+                    this,
+                    <AppNew callback={this.CallForInterface.bind(this)} />
+                  )}
                   class="btn btn-danger navbar-btn"
                   className="btn-hover color-1"
                 >
-                  <i class="fa fa-home" />
-                  <span class="ml-2">CONNECTIVITY</span>
+                  <i class="fa fa-random" />
+                  <span class="ml-2">Dummy</span>
                 </button>
               </li>
               <li class="nav-item" className="link">
