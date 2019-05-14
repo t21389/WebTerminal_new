@@ -24,7 +24,7 @@ class NavBar extends Component {
   }
 
   clickHand(event) {
-    //console.log('Clicked Here', event) ;
+    //console.log('Clicked Here', event)  ;
     this.props.callback(event);
   }
   CallForInterface = async params => {
