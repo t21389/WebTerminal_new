@@ -36,6 +36,7 @@ const server = app.listen(config.port, () => {
 const io = require("./controller/clientWebSocket").initialize(server);
 
 // When a client connects, we note it in the console
+
 io.on("connection", socket => {
   console.log("Browser client is connected with client Id :", socket.id);
 
@@ -53,6 +54,7 @@ io.on("connection", socket => {
 });
 
 // socket for communicating with node server
+
 // ws = new WebSocket(config.server_socket_add);
 // const socketHandlerFromSystem = require("./controller/socketHandlerFromSystem");
 
@@ -67,6 +69,7 @@ io.on("connection", socket => {
 
 // global.ws.on("message", function incoming(data) {
 //   console.log("Socket Message from Akshay :", data);
+
 //   let res = JSON.parse(data);
 //   socketHandlerFromSystem.fHandleSocketFromSystem(res.OpCode);
 // });

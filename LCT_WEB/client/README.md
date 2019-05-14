@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-#new entry
-=======
-# More changes
-#on test branch
->>>>>>> 678dddfbc2583c8913cec9e5f4d1e34e9c8097b4
+#New One On Working Branches
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

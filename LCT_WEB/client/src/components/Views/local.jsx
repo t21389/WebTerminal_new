@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./../../css/discovery.css";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import socketIOClient from "socket.io-client";
+
 
 class Local extends React.Component {
   constructor(props) {
@@ -36,9 +36,7 @@ class Local extends React.Component {
   loggedInHandle = () => {
     // this.setState({loggedIn :true})
 
-    const { endpoint } = this.state;
-    const socket = socketIOClient(endpoint);
-    socket.on("message", data => this.setState({ response: data }));
+   
   };
   render() {
     var jsonString = this.props.interfaceJson;
@@ -92,13 +90,6 @@ class Local extends React.Component {
                   </button>
                 </Link>
               </div>
-            </div>
-            <div style={{ textAlign: "center" }}>
-              {response ? (
-                <p>Response from Socket :{response}</p>
-              ) : (
-                <p> Socket Not Connected</p>
-              )}
             </div>
           </form>
         </div>

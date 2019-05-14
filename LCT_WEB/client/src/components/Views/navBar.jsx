@@ -1,7 +1,3 @@
-/* eslint-disable default-case */
-/* eslint-disable no-unreachable */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-lone-blocks */
 import React, { Component } from "react";
 import GetOrders from "./getorders";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -10,6 +6,8 @@ import Main from "./main";
 import Discovery from "./discovery";
 import "./../../css/navbar.css";
 import Topology from "./topology";
+import NEList from "./NEList";
+import AppNew from "./app";
 
 class NavBar extends Component {
   constructor(props) {
@@ -17,7 +15,8 @@ class NavBar extends Component {
     this.state = {
       orderIddata: "",
       message: "",
-      displayMenu: false
+      displayMenu: false,
+      color: "red"
     };
 
     this.showDropdownMenu = this.showDropdownMenu.bind(this);
@@ -25,27 +24,9 @@ class NavBar extends Component {
   }
 
   clickHand(event) {
-    //console.log('Clicked Here', event);
+    //console.log('Clicked Here', event)  ;
     this.props.callback(event);
   }
-  // clickHandler(event, Component) {
-  //   console.log("clicked Here", event, "and", this.props);
-
-  // //   switch (event) {
-  // //     case 1:
-  // //       {
-  // //         console.log("event 1 :CallForOrderId", this.props);
-  // //         this.props.callbackI(Component).then(resp => {
-  // //           console.log("response final", resp);
-  // //           this.setState({
-  // //             orderIddata: resp
-  // //           });
-  // //           this.props.DisplayOrderIdData(<GetOrders orderIddata={resp} />);
-  // //         });
-  // //       }
-  // //       break;
-  // //   }
-  // }
   CallForInterface = async params => {
     const response = await this.callApi(1);
     console.log("response1<<<<<<<<<<" + response);
@@ -93,18 +74,6 @@ class NavBar extends Component {
           return body2;
         }
         break;
-      // case 3:
-      // {
-      //   console.log("event 1 :CallForOrderId", this.props);
-      //           this.props.callbackI(Component).then(resp => {
-      //             console.log("response final", resp);
-      //             this.setState({
-      //               orderIddata: resp
-      //             });
-      //             this.props.DisplayOrderIdData(<GetOrders orderIddata={resp} />);
-      //           });
-      // }
-      // break;
     }
   };
 
@@ -128,18 +97,12 @@ class NavBar extends Component {
     });
   }
   render() {
+    const sidebarColorStyle = {
+      background: this.props.color
+    };
     return (
       <div>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-          {/* <a class="navbar-brand" href="#">
-              <img
-                src={require("./../../assets/logo.svg")}
-                width="30"
-                height="30"
-                alt=""
-              />
-            </a> */}
-
+        <nav class="navbar navbar-expand-md" style={sidebarColorStyle}>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item" className="link">
@@ -168,15 +131,33 @@ class NavBar extends Component {
                   <span class="ml-2">DISCOVERY</span>
                 </button>
               </li>
+              <li class="nav-item" className="link">
+                <button
+                  type="submit"
+                  onClick={this.clickHand.bind(
+                    this,
+                    <NEList callback={this.CallForInterface.bind(this)} />
+                  )}
+                  class="btn btn-danger navbar-btn"
+                  className="btn-hover color-1"
+                >
+                  <i class="fa fa-random" />
+                  <span class="ml-2">NE Info.</span>
+                </button>
+              </li>
 
               <li class="nav-item" className="link">
                 <button
                   type="submit"
+                  onClick={this.clickHand.bind(
+                    this,
+                    <AppNew callback={this.CallForInterface.bind(this)} />
+                  )}
                   class="btn btn-danger navbar-btn"
                   className="btn-hover color-1"
                 >
-                  <i class="fa fa-home" />
-                  <span class="ml-2">CONNECTIVITY</span>
+                  <i class="fa fa-random" />
+                  <span class="ml-2">Dummy</span>
                 </button>
               </li>
               <li class="nav-item" className="link">

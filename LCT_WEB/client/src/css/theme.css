@@ -1,0 +1,136 @@
+.fixed-plugin {
+    position: fixed;
+    right: 0;
+    width: 34px;
+    background:black;
+    z-index: 1031;
+    border-radius: 8px 0 0 8px;
+    text-align: center;
+    top: 90px;
+}
+.fixed-plugin .fa-cog {
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 0 0 6px 6px;
+    width: auto;
+}
+.fixed-plugin .dropdown.show .dropdown-menu {
+    opacity: 1;
+    transform-origin: 0 0;
+}
+.fixed-plugin .dropdown-menu {
+    right: 50px;
+    left: auto !important;
+    top: -12px !important;
+    width: 290px;
+    border-radius: 0.1875rem;
+    background: linear-gradient(#222a42, #1d253b);
+    
+}
+.fixed-plugin li.header-title {
+    color: #ffffff;
+    height: 30px;
+    line-height: 25px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+<style>…</style>
+.fixed-plugin li.adjustments-line {
+    width: 100%;
+    height: 50px;
+    min-height: inherit;
+}
+<style>…</style>
+.fixed-plugin .dropdown-menu li {
+    display: block;
+    padding: 18px 2px;
+    width: 25%;
+    float: left;
+}
+
+.fixed-plugin li.adjustments-line, .fixed-plugin li.header-title, .fixed-plugin li.button-container {
+    width: 100%;
+    height: 50px;
+    min-height: inherit;
+}
+
+<style>…</style>
+.fixed-plugin .dropdown-menu li {
+    display: block;
+    padding: 18px 2px;
+    width: 25%;
+    float: left;
+}
+.text-center {
+    text-align: center !important;
+}
+.fixed-plugin .badge {
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    height: 23px;
+    margin-right: 5px;
+    position: relative;
+    width: 23px;
+}
+.badge-primary {
+    color: #ffffff;
+    background-color: #e14eca;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.62475rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+.badge + .badge {
+    margin-left: 5px;
+}
+
+
+.badge-info {
+    color: #ffffff;
+    background-color: #1d8cf8;
+}
+.badge-success {
+    color: #ffffff;
+    background-color: #00f2c3;
+}
+
+.fixed-plugin .adjustments-line .color-label {
+    position: relative;
+    top: -7px;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 0.62475rem;
+    color: #ffffff;
+}
+.fixed-plugin .light-badge {
+    background: #ffffff;
+     margin: 0;
+    border: 2px solid #1d8cf8;
+}
+.fixed-plugin .dark-badge {
+    background: #222a42;
+}
+
+.fixed-plugin .light-badge, .fixed-plugin .dark-badge {
+    margin: 0;
+    border: 2px solid #1d8cf8;
+}
+.fixed-plugin li.button-container {
+    height: auto;
+}
+
+
+

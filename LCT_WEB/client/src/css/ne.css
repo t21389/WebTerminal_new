@@ -1,0 +1,52 @@
+.default>.head {
+    color: #333;
+    background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+    ;
+    border-color: #ddd;
+}
+
+.head {
+    padding: 1px 15px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-color: black;
+}
+
+.default {
+
+    background-color: #fff;
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    border-color: black;
+
+
+}
+
+.defaultpanel {
+    padding: 15px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    border-color: black;
+}
+
+.addoncheck {
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 4px;
+}
+
+.head h3 {
+    font-size: 1.05rem;
+    margin-bottom: .5rem;
+    margin-top: 10px;
+}
