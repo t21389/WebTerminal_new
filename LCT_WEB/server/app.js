@@ -4,7 +4,7 @@ var route = require("./route/route");
 const path = require("path");
 const cors = require("cors");
 const app = express();
-const WebSocket = require("ws");
+// const WebSocket = require("ws");
 
 // routes
 const msroute = require("./route/msroute");
@@ -33,13 +33,13 @@ const server = app.listen(config.port, () => {
 });
 
 // Loading socket.io
-const io = require("socket.io").listen(server);
+const io = require("./controller/clientWebSocket").initialize(server);
 
 // When a client connects, we note it in the console
-io.sockets.on("connection", function(socket) {
+io.on("connection", socket => {
   console.log("Browser client is connected with client Id :", socket.id);
 
-  socket.emit("message", "Hello dear Client");
+  io.emit("message", "Hello dear Client");
 
   // When the server receives a “message” type signal from the client
   socket.on("message", function(message) {
@@ -53,22 +53,22 @@ io.sockets.on("connection", function(socket) {
 });
 
 // socket for communicating with node server
-const ws = new WebSocket(config.server_socket_add);
-const socketHandlerFromSystem = require("./controller/socketHandlerFromSystem");
+// ws = new WebSocket(config.server_socket_add);
+// const socketHandlerFromSystem = require("./controller/socketHandlerFromSystem");
 
-ws.on("open", function open() {
-  console.log("connected to akshay");
-  ws.send(Date.now());
-});
+// global.ws.on("open", function open() {
+//   console.log("connected to akshay");
+//   ws.send("Hello Akshay ");
+// });
 
-ws.on("close", function close() {
-  console.log("disconnected from akshay");
-});
+// global.ws.on("close", function close() {
+//   console.log("disconnected from akshay");
+// });
 
-ws.on("message", function incoming(data) {
-  console.log("data :", data);
-  let res = JSON.parse(data);
-  socketHandlerFromSystem.fHandleSocketFromSystem(res.OpCode);
-});
+// global.ws.on("message", function incoming(data) {
+//   console.log("Socket Message from Akshay :", data);
+//   let res = JSON.parse(data);
+//   socketHandlerFromSystem.fHandleSocketFromSystem(res.OpCode);
+// });
 
 module.exports = app;

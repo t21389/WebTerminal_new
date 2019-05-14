@@ -1,7 +1,9 @@
 const axios = require("axios");
+const SystemInfoParser = require("../parser/SystemInfo").NodeInfo_Parser;
 
 module.exports.fHandleSocketFromSystem = async opcode => {
-  console.log("fHandleSocketFromSystem :: OpCode:", opcode);
+  const io = require("./clientWebSocket").getInstance();
+  // console.log("fHandleSocketFromSystem :: OpCode:", opcode);
   switch (opcode) {
     case 1234:
       {
@@ -11,12 +13,17 @@ module.exports.fHandleSocketFromSystem = async opcode => {
           OpCode: opcode
         });
 
-        console.log("fHandleSocketFromSystem :: Response :: ", response.data);
+        // console.log("fHandleSocketFromSystem :: Response :: ", response.data);
+        let parserResponse = await new SystemInfoParser().parse(response.data);
+        console.log({ parserResponse });
+
+        io.emit("message", response.data);
+        // console.log("fHandleSocketFromSystem :: Response :: ", response.data);
       }
       break;
 
     default:
-      console.log("fHandleSocketFromSystem :: Default Case");
+      // console.log("fHandleSocketFromSystem :: Default Case");
       break;
   }
 };
